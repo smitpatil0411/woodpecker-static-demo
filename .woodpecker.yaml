@@ -13,20 +13,20 @@ steps:
   - name: build
     image: node:20-alpine
     commands:
-      - echo "Pretend build: copy static files to dist/"
-      - mkdir -p dist
-      - cp -r site/* dist/
-      - ls -la dist
+      - sh -c "echo 'Pretend build: copy static files to dist/'"
+      - sh -c "mkdir -p dist"
+      - sh -c "cp -r site/* dist/"
+      - sh -c "ls -la dist"
 
   - name: test
     image: alpine:3.20
     commands:
-      - echo "Run a simple test..."
-      - grep -q "Hello Woodpecker" dist/index.html
-      - echo "All good!"
+      - sh -c "echo 'Run a simple test...'"
+      - sh -c "grep -q 'Hello Woodpecker' dist/index.html"
+      - sh -c "echo 'All good!'"
 
   - name: package
     image: alpine:3.20
     commands:
-      - tar -czf dist.tar.gz dist
-      - ls -lh dist.tar.gz
+      - sh -c "tar -czf dist.tar.gz dist"
+      - sh -c "ls -lh dist.tar.gz"
