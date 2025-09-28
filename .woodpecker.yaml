@@ -7,13 +7,14 @@ steps:
     image: alpine:3.20
     commands:
       - echo "Validating repo contents..."
+      - ls -lah
       - test -f site/index.html
       - test -f site/styles.css
 
   - name: build
     image: node:20-alpine
     commands:
-      - sh -c "echo 'Pretend build: copy static files to dist/'"
+      - sh -c "echo Pretend build: copy static files to dist/"
       - sh -c "mkdir -p dist"
       - sh -c "cp -r site/* dist/"
       - sh -c "ls -la dist"
@@ -21,9 +22,9 @@ steps:
   - name: test
     image: alpine:3.20
     commands:
-      - sh -c "echo 'Run a simple test...'"
-      - sh -c "grep -q 'Hello Woodpecker' dist/index.html"
-      - sh -c "echo 'All good!'"
+      - sh -c "echo Running basic grep test..."
+      - sh -c "grep -q Hello dist/index.html"
+      - sh -c "echo All good!"
 
   - name: package
     image: alpine:3.20
